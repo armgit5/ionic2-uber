@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 /*
   Generated class for the Map component.
@@ -14,6 +14,8 @@ export class MapComponent implements OnInit {
 
   text: string;
   public map;
+
+  @Input() isPickupRequested: boolean;
 
   constructor() {
     console.log('Hello Map Component');

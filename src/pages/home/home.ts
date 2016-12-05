@@ -7,8 +7,18 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
+  public isPickupRequested: boolean;
+
   constructor(public navCtrl: NavController) {
-    
+    this.isPickupRequested = false;
+  }
+
+  confirmPickup() {
+    this.isPickupRequested = true;
+  }
+
+  cancelPickup() {
+    this.isPickupRequested = false;
   }
 
 }

@@ -1,7 +1,15 @@
 <ion-header>
   <ion-navbar>
+
+    <ion-buttons start>
+      <button [hidden]="!isPickupRequested" ion-button (click)="cancelPickup()">
+        <ion-icon name="arrow-back"></ion-icon> Cancel
+      </button>
+    </ion-buttons>
+
     <ion-title>
-      PickMeUp
+      <span [hidden]="isPickupRequested">PickMeUp</span>
+      <span [hidden]="!isPickupRequested">On the way...</span>
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,5 +17,44 @@
 <ion-content>
   <div class="map-wrapper">
     <map></map>
+  </div>
+
+  <div class="bottom request-controls">
+    <ion-row>
+      <ion-col width-50>
+        <button ion-button block color="light">
+          <ion-icon name="card"></ion-icon>
+          Visa **34
+        </button>
+      </ion-col>
+      <ion-col width-50>
+        <button ion-button block color="light">
+          <ion-icon name="cash"></ion-icon>
+          Cash
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+      <button [hidden]="isPickupRequested" ion-button block color="primary"
+        (click)="confirmPickup()">      
+          Request Pickup
+        </button>
+        <button [hidden]="!isPickupRequested" ion-button block color="primary"
+        (click)="cancelPickup()">      
+          Cancel Pickup
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+         
+          PICKUP IS APPOXIMATELY 5 MIN
+        
+      </ion-col>
+    </ion-row>
+
   </div>
 </ion-content>
