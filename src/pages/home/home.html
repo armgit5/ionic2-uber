@@ -11,12 +11,19 @@
       <span [hidden]="isPickupRequested">PickMeUp</span>
       <span [hidden]="!isPickupRequested">On the way...</span>
     </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="map.centerLocation()">
+       <ion-icon name="navigate"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div class="map-wrapper">
-    <map></map>
+    <map #map [isPickupRequested]="isPickupRequested"></map>
   </div>
 
   <div class="bottom request-controls">
