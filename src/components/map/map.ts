@@ -19,6 +19,7 @@ export class MapComponent implements OnInit {
 
   text: string;
   public map;
+  public isMapIdle: boolean;
 
   @Input() isPickupRequested: boolean;
 
@@ -30,11 +31,24 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.map = this.createMap();
+    this.addMapEventListeners();
+
     this.getCurrentLocation().subscribe(
       location => {
         this.centerLocation(location);
       }
     )
+  }
+
+  addMapEventListeners() {
+    google.maps.event.addListener(this.map, 'dragstart', () => {
+      this.isMapIdle = false;
+      // console.log('dragging');
+    });
+    google.maps.event.addListener(this.map, 'idle', () => {
+      this.isMapIdle = true;
+      // console.log('idle');
+    });
   }
 
   centerLocation(location) {
