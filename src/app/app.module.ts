@@ -4,13 +4,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MapComponent } from '../components/map/map';
 import { PickupComponent } from '../components/pickup/pickup';
+import { AvailableCarsComponent } from '../components/available-cars/available-cars';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     MapComponent,
-    PickupComponent
+    PickupComponent,
+    AvailableCarsComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,7 +22,8 @@ import { PickupComponent } from '../components/pickup/pickup';
     MyApp,
     HomePage,
     MapComponent,
-    PickupComponent
+    PickupComponent,
+    AvailableCarsComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
