@@ -32,6 +32,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.map = this.createMap();
     this.addMapEventListeners();
+    this.isMapIdle = false;
+    console.log(this.isMapIdle);
 
     this.getCurrentLocation().subscribe(
       location => {
@@ -61,6 +63,7 @@ export class MapComponent implements OnInit {
         }
       );
     }
+    this.isMapIdle = false;
   }
 
   getCurrentLocation(): Observable<any> {

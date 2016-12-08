@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/0479daf2d17921abfbc9dd080d5e90565b4a57f5/marker-animate-unobtrusive/marker-animate-unobtrusive.d.ts",
+    "raw": "registry:dt/marker-animate-unobtrusive#0.2.8+20160811114501",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/0479daf2d17921abfbc9dd080d5e90565b4a57f5/marker-animate-unobtrusive/marker-animate-unobtrusive.d.ts"
+  }
+}

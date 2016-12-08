@@ -1,0 +1,5 @@
+{
+  "globalDependencies": {
+    "marker-animate-unobtrusive": "registry:dt/marker-animate-unobtrusive#0.2.8+20160811114501"
+  }
+}

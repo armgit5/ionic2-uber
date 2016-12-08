@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { CarService } from '../../providers/car';
-
+import SlidingMarker from 'marker-animate-unobtrusive';
 /*
   Generated class for the AvailableCars component.
 
@@ -27,12 +27,29 @@ export class AvailableCarsComponent implements OnInit {
     this.fetchAndRefreshCars();
   }
 
+  ngOnChanges() {
+    if (this.isPickupRequested) {
+      this.removeCarMarkers();
+    }
+  }
+
+  removeCarMarkers() {
+    let numOfCars = this.carMarkers.length;
+    while(numOfCars--) {
+      let car = this.carMarkers.pop();
+      car.setMap(null);
+    }
+  }
+
   addCarMarker(car) {
-    let carMarker = new google.maps.Marker({
+    let carMarker = new SlidingMarker({
       map: this.map,
       position: new google.maps.LatLng(car.coord.lat, car.coord.lng),
       icon: 'img/car.png'
     });
+
+    carMarker.setDuration(3000);
+    carMarker.setEasing('linear');
 
     carMarker.set('id', car.id);
 
