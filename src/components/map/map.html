@@ -11,10 +11,17 @@
   <div id="map"></div>
   <pickup 
     [map]="map" 
-    [isPinSet]="isMapIdle">
+    [isPinSet]="isMapIdle"
+    [isPickupRequested]="isPickupRequested"
+    (updatedPickupLocation)="updatedPickupLocation($event)">
   </pickup>
   <available-cars
     [map]="map"
+    [isPickupRequested]="isPickupRequested">
+  </available-cars>
+  <pickup-car
+    [map]="map"
     [isPickupRequested]="isPickupRequested"
-  ></available-cars>
+    [pickupLocation]="currentLocation">
+  </pickup-car>
 </div>

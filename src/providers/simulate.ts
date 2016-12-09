@@ -12,8 +12,12 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class SimulateService {
 
-  constructor(public http: Http) {
+  public directionsService: google.maps.DirectionsService;
+  public myRoute: any;
+  public myRouteIndex: number;
 
+  constructor(public http: Http) {
+    this.directionsService = new google.maps.DirectionsService();
   }
 
   getCars(lat, lng) {
@@ -28,6 +32,96 @@ export class SimulateService {
     return Observable.create(
       observer => observer.next(carData)
     );
+  }
+
+  calculateRoute(start, end) {
+    return Observable.create(observable => {
+      this.directionsService.route({
+        origin: start,
+        destination: end,
+        travelMode: google.maps.TravelMode.DRIVING
+      }, (response, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          observable.next(response);
+        } else {
+          observable.next(status);
+        }
+      });
+    });
+  }
+
+  getSegmentedDirection(directions) {
+    let route = directions.routes[0];
+    let legs = route.legs;
+    let path = [];
+    let increments = [];
+    let duration = 0;
+
+    // console.log('getsegment');
+
+    let numOfLegs = legs.length;
+    // console.log('legs '+ legs);
+    // console.log('numOfLegs '+ numOfLegs);
+    while (numOfLegs--) {
+      let leg = legs[numOfLegs];
+      let steps = leg.steps;
+      let numOfSteps = steps.length;
+
+      // console.log('numOfSteps '+ numOfSteps);
+      while (numOfSteps--) {
+        let step = steps[numOfSteps];
+        let points = step.path;
+        let numOfPoints = points.length;
+        // console.log('numOfPoint '+ numOfPoints);
+        duration += step.duration.value;
+
+        while(numOfPoints--) {
+          let point = points[numOfPoints];
+          // console.log('point'+point);
+          path.push(point);
+
+          increments.unshift({
+            position: point,
+            time: duration,
+            path: path.slice(0)
+          });
+        }
+      }
+    } 
+
+    return increments;
+  }
+
+  getPickupCar() {
+    return Observable.create(observable => {
+      let car = this.myRoute[this.myRouteIndex];
+
+      observable.next(car);
+      this.myRouteIndex++;
+
+    });
+  }
+
+  simulateRoute(start, end) {
+    return Observable.create(observable => {
+      this.calculateRoute(start, end).subscribe(directions => {
+        this.myRoute = this.getSegmentedDirection(directions);
+        this.getPickupCar().subscribe(car => {
+          observable.next(car);
+        });
+      });
+    });
+  }
+
+  findPickupCar(pickupLocation) {
+
+    this.myRouteIndex = 0;
+
+    let car = this.cars1.cars[0];
+    let start = new google.maps.LatLng(car.coord.lat, car.coord.lng);
+    let end = pickupLocation;
+
+    return this.simulateRoute(start, end);
   }
 
   private cars1 = {

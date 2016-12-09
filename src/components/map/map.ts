@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Injectable } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import {Observable} from 'rxjs/Rx';
+import { CarService } from '../../providers/car';
 
 /*
   Generated class for the Map component.
@@ -11,7 +12,8 @@ import {Observable} from 'rxjs/Rx';
 */
 @Component({
   selector: 'map',
-  templateUrl: 'map.html'
+  templateUrl: 'map.html',
+  providers: [CarService]
 })
 
 @Injectable()
@@ -20,13 +22,12 @@ export class MapComponent implements OnInit {
   text: string;
   public map;
   public isMapIdle: boolean;
+  public currentLocation: google.maps.LatLng;
 
   @Input() isPickupRequested: boolean;
 
   constructor(private loadingCtrl: LoadingController) {
-    console.log('Hello Map Component');
-    this.text = 'Hello World';
-    
+   
   }
 
   ngOnInit() {
@@ -40,6 +41,15 @@ export class MapComponent implements OnInit {
         this.centerLocation(location);
       }
     )
+  }
+
+  updatedPickupLocation(location) {
+    
+    // this.currentLocation = new google.maps.LatLng(location.lat, location.lng);
+    
+
+    this.currentLocation = location;
+    // this.centerLocation(this.currentLocation);
   }
 
   addMapEventListeners() {

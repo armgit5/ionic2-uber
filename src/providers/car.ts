@@ -26,5 +26,12 @@ export class CarService {
           .share();
   }
 
+  findPickupCar(pickupLocation) {
+    return this.simulate.findPickupCar(pickupLocation);
+  }
+
+  getPickupCar() {
+    return this.simulate.getPickupCar();
+  }
 
 }

@@ -5,6 +5,7 @@ import { HomePage } from '../pages/home/home';
 import { MapComponent } from '../components/map/map';
 import { PickupComponent } from '../components/pickup/pickup';
 import { AvailableCarsComponent } from '../components/available-cars/available-cars';
+import { PickupCarComponent } from '../components/pickup-car/pickup-car';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { AvailableCarsComponent } from '../components/available-cars/available-c
     HomePage,
     MapComponent,
     PickupComponent,
-    AvailableCarsComponent
+    AvailableCarsComponent,
+    PickupCarComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +25,8 @@ import { AvailableCarsComponent } from '../components/available-cars/available-c
     HomePage,
     MapComponent,
     PickupComponent,
-    AvailableCarsComponent
+    AvailableCarsComponent,
+    PickupCarComponent
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

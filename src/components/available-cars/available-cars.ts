@@ -9,8 +9,7 @@ import SlidingMarker from 'marker-animate-unobtrusive';
 */
 @Component({
   selector: 'available-cars',
-  templateUrl: 'available-cars.html',
-  providers: [CarService]
+  templateUrl: 'available-cars.html'
 })
 export class AvailableCarsComponent implements OnInit {
 
