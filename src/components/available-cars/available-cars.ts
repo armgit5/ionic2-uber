@@ -11,7 +11,7 @@ import SlidingMarker from 'marker-animate-unobtrusive';
   selector: 'available-cars',
   templateUrl: 'available-cars.html'
 })
-export class AvailableCarsComponent implements OnInit {
+export class AvailableCarsComponent implements OnInit, OnChanges {
 
   @Input() map: google.maps.Map;
   @Input() isPickupRequested: boolean;

@@ -10,6 +10,7 @@
 <div class="wrapper"> 
   <div id="map"></div>
   <pickup 
+    [hidden]="isPickupRequested"
     [map]="map" 
     [isPinSet]="isMapIdle"
     [isPickupRequested]="isPickupRequested"

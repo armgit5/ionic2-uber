@@ -32,15 +32,15 @@ export class PickupComponent implements OnChanges {
         } else {
           this.removePickupMarker();
         }
-    }
+    } 
    
-
   }
 
   showPickupMarker() {
 
     this.removePickupMarker();
 
+    console.log('show marker');
     this.pickupMarker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.BOUNCE,
@@ -66,7 +66,6 @@ export class PickupComponent implements OnChanges {
       this.pickupMarker.setMap(null);
       this.pickupMarker = null;
     }
-     
   }
 
   showPickupTime() {
