@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CarService } from '../../providers/car';
 import SlidingMarker from 'marker-animate-unobtrusive';
+import { PickupPubSub } from '../../providers/pickup-pub-sub';
 
 /*
   Generated class for the PickupCar component.
@@ -21,7 +22,8 @@ export class PickupCarComponent implements OnInit, OnChanges {
   public pickupCarMarker: any;
   public polylinePath: google.maps.Polyline;
 
-  constructor(public carService: CarService) {
+  constructor(public carService: CarService,
+              private pickupPubSub: PickupPubSub) {
   }
 
   ngOnInit() {
@@ -62,7 +64,8 @@ export class PickupCarComponent implements OnInit, OnChanges {
     this.carService.getPickupCar().subscribe(car => {
       this.pickupCarMarker.setPosition(car.position);
       this.polylinePath.setPath(car.path);
-
+      console.log(car.time);
+      this.pickupPubSub.emitArrivalTime(car.time);
       if (car.path.length > 1) {
         setTimeout(() => {
           this.updateCar();
