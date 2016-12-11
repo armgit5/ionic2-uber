@@ -30,7 +30,7 @@ export class PickupCarComponent implements OnInit, OnChanges {
 
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes) {
     if (this.isPickupRequested) {
       this.requestCar();
     } else {
@@ -62,10 +62,14 @@ export class PickupCarComponent implements OnInit, OnChanges {
 
   updateCar() {
     this.carService.getPickupCar().subscribe(car => {
-      this.pickupCarMarker.setPosition(car.position);
-      this.polylinePath.setPath(car.path);
-      console.log(car.time);
-      this.pickupPubSub.emitArrivalTime(car.time);
+      console.log('car posi ' + car.position);
+      if (car) {
+        this.pickupCarMarker.setPosition(car.position);
+        this.polylinePath.setPath(car.path);
+        console.log(car.time);
+        this.pickupPubSub.emitArrivalTime(car.time);
+      }
+      
       if (car.path.length > 1) {
         setTimeout(() => {
           this.updateCar();
@@ -98,14 +102,14 @@ export class PickupCarComponent implements OnInit, OnChanges {
   removeCar() {
     if (this.pickupCarMarker) {
       this.pickupCarMarker.setMap(null); 
-      this.pickupCarMarker = null;
+      // this.pickupCarMarker = null;
     }
   }
 
   removeDirections() {
     if (this.polylinePath) {
       this.polylinePath.setMap(null);
-      this.polylinePath = null;
+      // this.polylinePath = null;
     }
   }
 

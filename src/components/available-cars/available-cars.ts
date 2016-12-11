@@ -26,7 +26,7 @@ export class AvailableCarsComponent implements OnInit, OnChanges {
     this.fetchAndRefreshCars();
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes) {
     if (this.isPickupRequested) {
       this.removeCarMarkers();
     }
@@ -60,8 +60,10 @@ export class AvailableCarsComponent implements OnInit, OnChanges {
     var numOfCars = this.carMarkers.length;
     for (var i=0; i < numOfCars; i++) {
       if (this.carMarkers[i].get('id') === car.id) {
+        if (car) {
+          this.carMarkers[i].setPosition(new google.maps.LatLng(car.coord.lat, car.coord.lng));
+        }
         
-        this.carMarkers[i].setPosition(new google.maps.LatLng(car.coord.lat, car.coord.lng));
         return;
       }
     }
