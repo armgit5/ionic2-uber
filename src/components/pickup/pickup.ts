@@ -35,7 +35,10 @@ export class PickupComponent implements OnChanges, OnInit {
 
   updateTime(seconds) {
     let minutes = Math.floor(seconds/60);
-    this.popup.setContent(`<h5>${minutes}</h5> minutes`);
+    if (this.isPickupRequested) {
+      this.popup.setContent(`<h5>${minutes}</h5> minutes`);
+    }
+    
   }
 
   ngOnChanges(changes) {

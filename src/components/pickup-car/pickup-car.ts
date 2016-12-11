@@ -62,11 +62,11 @@ export class PickupCarComponent implements OnInit, OnChanges {
 
   updateCar() {
     this.carService.getPickupCar().subscribe(car => {
-      console.log('car posi ' + car.position);
+      // console.log('car posi ' + car.position);
       if (car) {
         this.pickupCarMarker.setPosition(car.position);
         this.polylinePath.setPath(car.path);
-        console.log(car.time);
+        // console.log(car.time);
         this.pickupPubSub.emitArrivalTime(car.time);
       }
       
